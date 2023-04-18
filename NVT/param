@@ -1,0 +1,22 @@
+'ensemble parameters'
+'number of dimensions (D)'                  2
+'number of particles (N)'                   100
+'density'                                   0.5d0
+'temperature'                               1.0d0
+'simulation parameters'
+'LJ potential parameters'                   1.0d0           1.0d0
+'random seed'                               1303
+'number of series of sampling (MAX 20)'     20
+'equilibration length'                      100000
+'MC parameters'
+'number of cycles (N trial moves)'          100000
+'trial moves per sample (same as N)'        100
+'MAX random displacement by sigma'          0.1d0
+'MD parameters'
+'number of time steps'                      100000
+'time step'                                 0.001d0
+'temperature time constant'                 0.1d0
+'time steps per frame'                      100
+'correlation function parameters'
+'g(r) radial interval'                      0.02d0
+'cycles/steps per g(r) sampling'            10

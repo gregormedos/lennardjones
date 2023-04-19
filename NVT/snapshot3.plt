@@ -15,20 +15,19 @@ set size square
 unset xtics
 unset ytics
 unset ztics
-halflbox=0.5
-set xrange [-halflbox:halflbox]
-set yrange [-halflbox:halflbox]
-set zrange [-halflbox:halflbox]
+set xrange [-0.5:0.5]
+set yrange [-0.5:0.5]
+set zrange [-0.5:0.5]
 set output 'snapshot_random.png'
-splot 'snapshot_random' with circles lc rgb "black"
+splot 'snapshot_random' with circles lw 2 lc rgb "black"
 set output 'snapshot_minpos.png'
-splot 'snapshot_minpos' with circles lc rgb "black"
+splot 'snapshot_minpos' with circles lw 2 lc rgb "black"
 set output 'snapshot_mcequi.png'
-splot 'snapshot_mcequi' with circles lc rgb "black"
+splot 'snapshot_mcequi' with circles lw 2 lc rgb "black"
 set output 'snapshot_mdinit.png'
-splot 'snapshot_mdinit' with circles lc rgb "black"
+splot 'snapshot_mdinit' with circles lw 2 lc rgb "black"
 set output 'snapshot_mdequi.png'
-splot 'snapshot_mdequi' with circles lc rgb "black"
+splot 'snapshot_mdequi' with circles lw 2 lc rgb "black"
 do for [i=1:5] {
   set output sprintf('snapshot_mc%04d.png', i)
   splot sprintf('snapshot_mc%04d', i) with circles lw 2 lc rgb "black"

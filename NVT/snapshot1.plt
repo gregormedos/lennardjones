@@ -13,19 +13,18 @@ set terminal png enhanced
 set size 1.0,0.5
 unset xtics
 unset ytics
-halflbox=0.5
-set xrange [-halflbox:-halflbox+0.2]
+set xrange [-0.5:-0.3]
 set yrange [-0.1:0.1]
 set output 'snapshot_random.png'
-plot 'snapshot_random' u 1:(0):2 with circles lc rgb "black"
+plot 'snapshot_random' u 1:(0):2 with circles lw 2 lc rgb "black"
 set output 'snapshot_minpos.png'
-plot 'snapshot_minpos' u 1:(0):2 with circles lc rgb "black"
+plot 'snapshot_minpos' u 1:(0):2 with circles lw 2 lc rgb "black"
 set output 'snapshot_mcequi.png'
-plot 'snapshot_mcequi' u 1:(0):2 with circles lc rgb "black"
+plot 'snapshot_mcequi' u 1:(0):2 with circles lw 2 lc rgb "black"
 set output 'snapshot_mdinit.png'
-plot 'snapshot_mdinit' u 1:(0):2 with circles lc rgb "black"
+plot 'snapshot_mdinit' u 1:(0):2 with circles lw 2 lc rgb "black"
 set output 'snapshot_mdequi.png'
-plot 'snapshot_mdequi' u 1:(0):2 with circles lc rgb "black"
+plot 'snapshot_mdequi' u 1:(0):2 with circles lw 2 lc rgb "black"
 do for [i=1:5] {
   set output sprintf('snapshot_mc%04d.png', i)
   plot sprintf('snapshot_mc%04d', i) u 1:(0):2 with circles lw 2 lc rgb "black"

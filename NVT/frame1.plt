@@ -13,8 +13,7 @@ set terminal gif enhanced animate delay 1 optimize
 set size 1.0,0.5
 unset xtics
 unset ytics
-halflbox=0.5
-set xrange [-halflbox:-halflbox+0.2]
+set xrange [-0.5:-0.3]
 set yrange [-0.1:0.1]
 set output 'movie.gif'
 do for [i=1:100] {

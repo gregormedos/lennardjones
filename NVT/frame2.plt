@@ -14,9 +14,8 @@ set size 1.0,1.0
 set size square
 unset xtics
 unset ytics
-halflbox=0.5
-set xrange [-halflbox:halflbox]
-set yrange [-halflbox:halflbox]
+set xrange [-0.5:0.5]
+set yrange [-0.5:0.5]
 set output 'movie.gif'
 do for [i=1:100] {
   plot sprintf('frame_01%06d', i) notitle with circles lw 2 lc rgb "black"

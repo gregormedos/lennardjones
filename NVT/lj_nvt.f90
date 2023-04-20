@@ -62,7 +62,7 @@ module correlation
   real*8, dimension(10000) :: gr                !correlation function g(r)
   real*8 :: grinterv                            !g(r) radial interval
   integer :: ngr                                !cycles/steps per g(r)
-  integer :: mmm                                !number of samples
+  integer :: mgr                                !number of samples
 endmodule correlation
 
 
@@ -200,7 +200,7 @@ program core
     cv=(uu2-uu**2)/temp**2/dble(N)
     pp=pp/dble(m)
     kx=dble(accx)/dble(ncycl*N)
-    gr=gr/dble(mmm)
+    gr=gr/dble(mgr)
     thermo(1,j)=uu/dble(N)
     thermo(2,j)=pp
     thermo(3,j)=cv
@@ -275,11 +275,13 @@ program core
     call mdseries(j)
     write(fmt,'(a2,i4.4)')'md',j
     call snapshot(fmt)
+    write(fmt,'(i4.4)')j
+    call velocities(fmt)
     uu=uu/dble(m)
     uu2=uu2/dble(m)
     cv=(uu2-uu**2)/temp**2/dble(N)
     pp=pp/dble(m)
-    gr=gr/dble(mmm)
+    gr=gr/dble(mgr)
     thermo(1,j)=uu/dble(N)
     thermo(2,j)=pp
     thermo(3,j)=cv
@@ -658,7 +660,7 @@ subroutine mcseries(idum)
   m=0
   accx=0
   gr=0.0d0
-  mmm=0
+  mgr=0
 
   write(fmt,'(i3.3)')idum
   open(202,file='mc_sam'//trim(fmt))
@@ -673,7 +675,7 @@ subroutine mcseries(idum)
       m=m+1
       if (mod(i,ngr*N).eq.0) then
         call corr()
-        mmm=mmm+1
+        mgr=mgr+1
       endif
     endif
   enddo
@@ -1016,7 +1018,7 @@ subroutine mdseries(idum)
   pp=0.0d0
   m=0
   gr=0.0d0
-  mmm=0
+  mgr=0
 
   write(fmt,'(i3.3)')idum
   open(202,file='md_sam'//trim(fmt))
@@ -1033,7 +1035,7 @@ subroutine mdseries(idum)
     m=m+1
     if (mod(i,ngr).eq.0) then
       call corr()
-      mmm=mmm+1
+      mgr=mgr+1
     endif
     if (idum.eq.1.and.mod(i,nframe).eq.0.and.(i/nframe).lt.101) then
       write(fmt,'(i2.2,i6.6)')idum,i/nframe
@@ -1069,6 +1071,26 @@ subroutine snapshot(fmt)
   enddo
   close(111)
 endsubroutine snapshot
+
+!-------------------------------------------------------
+!Velocities
+!-------------------------------------------------------
+subroutine velocities(fmt)
+  use parameters
+  use particles
+  implicit none
+  character(4) :: fmt
+  integer :: i,ii
+
+  open(111,file='md_velocities'//fmt)
+  do i=1,N
+    do ii=1,dim_
+      write(111,'(3f16.7)',advance='no')vel(i,ii)
+    enddo
+    write(111,*)''
+  enddo
+  close(111)
+endsubroutine velocities
 
 !--------------------------------------------------------
 !Movie
